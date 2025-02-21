@@ -550,10 +550,17 @@ function prompt_emacsdir {
   PR="DIR \w DIR$PR"
 }
 
+function prompt_distrobox {
+  if [ -n "${CONTAINER_ID}" ]; then
+    prompt_segment cyan white "📦${CONTAINER_ID}"
+  fi
+}
+
 ######################################################################
 ## Main prompt
 
 function build_prompt {
+  prompt_distrobox
   [[ ! -z ${AG_EMACS_DIR+x} ]] && prompt_emacsdir
   prompt_status
   #[[ -z ${AG_NO_HIST+x} ]] && prompt_histdt
